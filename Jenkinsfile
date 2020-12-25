@@ -21,8 +21,10 @@ pipeline {
       agent any
       steps {
         echo 'Uploading to S3'
-        withAWS(credentials: 'cidi-user', region: 'us-west-2')
-        s3Upload(bucket: 'shark-s3-bucket', pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'index.html', acl: 'PublicRead')
+        withAWS(credentials: 'cidi-user', region: 'us-west-2') {
+          s3Upload(bucket: 'shark-s3-bucket', pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'index.html', acl: 'PublicRead')
+        }
+
       }
     }
 
