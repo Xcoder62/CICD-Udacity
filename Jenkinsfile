@@ -17,12 +17,9 @@ pipeline {
       }
     }
 
-    stage('Upload to AWS') {
+    stage('Upload to S3') {
       steps {
-        withAWS(region: 'us-west-2', credentials: 'aws-static') {
-          sh 'echo "Uploading content with AWS creds"'
-        }
-
+        echo 'Uploading to S3'
         s3Upload(bucket: 'shark-s3-bucket', pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'index.html')
       }
     }
