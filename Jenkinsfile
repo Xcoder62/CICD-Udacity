@@ -21,7 +21,7 @@ pipeline {
       agent any
       steps {
         echo 'Uploading to S3'
-        withAWS(region: 'us-west-2') {
+        withAWS(region: 'us-west-2', profile: 'cidi_user') {
           s3Upload(bucket: 'shark-s3-bucket', pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'index.html', acl: 'PublicRead')
         }
 
